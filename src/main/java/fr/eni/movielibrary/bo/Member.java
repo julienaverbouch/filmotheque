@@ -67,10 +67,23 @@ public class Member {
 	}
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", login=" + login
-				+ ", password=" + password + ", isAdmin=" + isAdmin + ", listOpinions=" + listOpinions + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Member [id=");
+		builder.append(id);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", login=");
+		builder.append(login);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", isAdmin=");
+		builder.append(isAdmin);
+		builder.append(", listOpinions=");
+		builder.append(listOpinions);
+		builder.append("]");
+		return builder.toString();
 	}
 
-	
-	
 }

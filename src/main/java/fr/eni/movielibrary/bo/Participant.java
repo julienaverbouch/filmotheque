@@ -54,10 +54,22 @@ public class Participant {
 	public void setListActors(List<Movie> listActors) {
 		this.listActors = listActors;
 	}
+
 	@Override
 	public String toString() {
-		return "Participant [id=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", director="
-				+ director + ", listActors=" + listActors + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Participant [id=");
+		builder.append(id);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", director=");
+		builder.append(director);
+		builder.append(", listActors=");
+		builder.append(listActors);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 	

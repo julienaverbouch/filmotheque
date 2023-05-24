@@ -40,7 +40,17 @@ public class Genre {
 	}
 	@Override
 	public String toString() {
-		return "Genre [id=" + id + ", label=" + label + ", listGenre=" + listGenre + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Genre [id=");
+		builder.append(id);
+		builder.append(", label=");
+		builder.append(label);
+		builder.append(", listGenre=");
+		builder.append(listGenre);
+		builder.append("]");
+		return builder.toString();
 	}
+
+	
 
 }

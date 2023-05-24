@@ -91,11 +91,38 @@ public class Movie {
 	}
 	@Override
 	public String toString() {
-		return "Movie [id=" + id + ", title=" + title + ", year=" + year + ", duration=" + duration + ", synopsis="
-				+ synopsis + ", director=" + director + ", listActors=" + listActors + ", listOpinions=" + listOpinions
-				+ ", genre=" + genre + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Movie [id=");
+		builder.append(id);
+		builder.append("]");
+		builder.append("\n");
+		builder.append("title : ");
+		builder.append(title);
+		builder.append("[");
+		builder.append("year : ");
+		builder.append(year);
+		builder.append(", ");
+		builder.append("duration : ");
+		builder.append(duration);
+		builder.append(" ]");
+		builder.append("\n");
+		builder.append("synopsis : ");
+		builder.append(synopsis);
+		builder.append("\n");
+		builder.append("director :");
+		builder.append(director);
+		builder.append("\n");
+		builder.append("listActors :");
+		builder.append(listActors);
+		builder.append("\n");
+		builder.append("listOpinions :");
+		builder.append(listOpinions);
+		builder.append("\n");
+		builder.append("genre :");
+		builder.append(genre);
+		builder.append("\n");
+		builder.append("]");
+		return builder.toString();
 	}
-	
-	
-	
+
 }

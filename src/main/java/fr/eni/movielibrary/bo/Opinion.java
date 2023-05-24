@@ -49,10 +49,19 @@ public class Opinion {
 	}
 	@Override
 	public String toString() {
-		return "Opinion [id=" + id + ", note=" + note + ", comment=" + comment + ", member=" + member + ", movie="
-				+ movie + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Opinion [id=");
+		builder.append(id);
+		builder.append(", note=");
+		builder.append(note);
+		builder.append(", comment=");
+		builder.append(comment);
+		builder.append(", member=");
+		builder.append(member);
+		builder.append(", movie=");
+		builder.append(movie);
+		builder.append("]");
+		return builder.toString();
 	}
-	
-	
 
 }
