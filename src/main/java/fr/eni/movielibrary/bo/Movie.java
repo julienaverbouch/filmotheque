@@ -9,6 +9,7 @@ public class Movie {
 	private int year;
 	private int duration;
 	private String synopsis;
+	private String image;
 	private Participant director;
 	private List<Participant> listActors;
 	private List<Opinion> listOpinions;
@@ -21,6 +22,15 @@ public class Movie {
 		this.year = year;
 		this.duration = duration;
 		this.synopsis = synopsis;
+	}
+	public Movie(long id, String title, int year, int duration, String synopsis, String image) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.year = year;
+		this.duration = duration;
+		this.synopsis = synopsis;
+		this.image = image;
 	}
 	public Movie(long id, String title, int year, int duration, String synopsis, Participant director,
 			List<Participant> listActors, List<Opinion> listOpinions, Genre genre) {
@@ -88,6 +98,12 @@ public class Movie {
 	}
 	public void setGenre(Genre genre) {
 		this.genre = genre;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	@Override
 	public String toString() {

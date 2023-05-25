@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="https://kit.fontawesome.com/bdd89edb33.js"></script>
+    <link rel="stylesheet" href="css/uikit.min.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css" />
-    <title>Flipping Cards</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/css/uikit.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/js/uikit.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/js/uikit-icons.min.js"></script>
+    <title>Liste des films</title>
   </head>
   <body>
     <section class="section-plans" id="section-plans">
@@ -26,15 +29,17 @@
           <div class="card">
             <div class="card__side card__side--front-1">
               <div class="card__title card__title--1">
-                <h4 class="card__heading"><span th:text="${movie.title}"/></span></h4>
+              	<img th:src="${movie.image}" style="height:230px;"/>
               </div>
-
               <div class="card__details">
+                  <div th:each="director: ${movie.director}">
                 <ul>
+                  <li>Film : <span th:text="${movie.title}"/></span></li>
                   <li>Année : <span th:text="${movie.year}"/></span></li>
-                  <li>Temps : <span th:text="${movie.duration}"/></span></li>
-                  <li>Synopsis : <span th:text="${movie.synopsis}"/></span>	</li>
+                  <li>Temps : <span th:text="${movie.duration}"/></span>min</li>
+                  <li>Réalisateur : <span th:text="${director.firstName}"></span><span th:text="${director.lastName}"></span></li>
                 </ul>
+               </div>
               </div>
             </div>
             <div class="card__side card__side--back card__side--back-1">
@@ -74,6 +79,7 @@
 	  line-height: 1.7;
 	  color: #fff;
 	  background: #000;
+	  height: 98vh;
 	}
 	
 	.heading-primary {
@@ -208,6 +214,10 @@
 	}
 	
 	.card__side {
+	  margin-top: 20px;
+	  display:flex;
+	  flex-direction: column;
+	  justify-content: center;
 	  height: 52rem;
 	  -webkit-transition: all 0.8s ease;
 	  transition: all 0.8s ease;
@@ -270,6 +280,7 @@
 	
 	.card__title {
 	  height: 20rem;
+	  margin-bottom: 30px;
 	  padding: 4rem 2rem 2rem;
 	  display: -webkit-box;
 	  display: -ms-flexbox;
@@ -315,6 +326,7 @@
 	
 	.card__details {
 	  padding: 0 2rem 2rem;
+	  padding-top: 20px;
 	}
 	
 	.card__details ul {
