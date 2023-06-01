@@ -15,5 +15,5 @@ public interface MovieService {
 	public Genre getGenreById(long id);
 	public Participant getParticipantById(long id);
 	public void saveMovie(Movie movie);
-	
+	public void editMovie(Movie movie);
 }

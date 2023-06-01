@@ -1,21 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<script src="https://kit.fontawesome.com/bdd89edb33.js"></script>
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
-	rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/css/uikit.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/js/uikit.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/uikit@3.16.19/dist/js/uikit-icons.min.js"></script>
-<title>Detail du film</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Header -->
+<div th:include="includes/header"></div>
+
 <body>
 	<section class="section-plans" id="section-plans">
 		<div class="u-center-text u-margin-bottom-big">
@@ -33,6 +20,7 @@
 									<ul>
 										<li>Synopsis : <span th:text="${movie.synopsis}" /></span></li>
 										<li>Réalisateur : <span th:text="${movie.director.firstName}"></span><span th:text="${movie.director.lastName}"></span></li>										
+										<li th:each="opinion: ${listOpinions}">Opinions: <div th:value="${opinion.id}" th:text="${opinion.comment}"> </div></li>
 									</ul>
 							</div>
 						</div>
@@ -45,6 +33,7 @@
 				</div>
 			</div>
 	</section>
+
 	<div class="card__cta-button">
 		<a th:href="@{/movies}" class="btn btn--white">Retour</a>
 	</div>

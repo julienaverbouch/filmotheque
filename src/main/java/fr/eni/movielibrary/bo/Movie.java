@@ -2,18 +2,79 @@ package fr.eni.movielibrary.bo;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+@Entity
+@Table(name = "movies")
 public class Movie {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@Column(nullable = false)
 	private String title;
+	
+	@Column(nullable = false)
 	private int year;
+	
+	@Column(nullable = false)
 	private int duration;
+	
+	@Column(nullable = false)
 	private String synopsis;
+	
+	@Column(nullable = true)
 	private String image;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "director_id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Participant director;
+	
+	@ManyToMany
+	@JoinTable(
+	name = "actors", 
+	joinColumns = @JoinColumn(name = "participant_id"),
+	inverseJoinColumns = @JoinColumn(name = "list_actor_id")
+	) 
 	private List<Participant> listActors;
+	
+	@OneToMany(mappedBy = "movie")
 	private List<Opinion> listOpinions;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "genre_id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private Genre genre;
+	
+	
+	
+	public Movie() {
+		super();
+	}
+	
+	public Movie(long id, String title, int year, int duration) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.year = year;
+		this.duration = duration;
+	}
 	
 	public Movie(long id, String title, int year, int duration, String synopsis) {
 		super();
@@ -105,40 +166,6 @@ public class Movie {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Movie [id=");
-		builder.append(id);
-		builder.append("]");
-		builder.append("\n");
-		builder.append("title : ");
-		builder.append(title);
-		builder.append("[");
-		builder.append("year : ");
-		builder.append(year);
-		builder.append(", ");
-		builder.append("duration : ");
-		builder.append(duration);
-		builder.append(" ]");
-		builder.append("\n");
-		builder.append("synopsis : ");
-		builder.append(synopsis);
-		builder.append("\n");
-		builder.append("director :");
-		builder.append(director);
-		builder.append("\n");
-		builder.append("listActors :");
-		builder.append(listActors);
-		builder.append("\n");
-		builder.append("listOpinions :");
-		builder.append(listOpinions);
-		builder.append("\n");
-		builder.append("genre :");
-		builder.append(genre);
-		builder.append("\n");
-		builder.append("]");
-		return builder.toString();
-	}
+
 
 }

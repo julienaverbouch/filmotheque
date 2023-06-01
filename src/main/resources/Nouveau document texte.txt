@@ -1,0 +1,12 @@
+GENRE : 
+
+insert into db_demo (id, label) values (1, 'Drama');
+insert into db_demo (id, label) values (2, 'Comedy');
+insert into db_demo (id, label) values (3, 'Drama|Mystery|Romance|Thriller');
+insert into db_demo (id, label) values (4, 'Comedy|Musical');
+insert into db_demo (id, label) values (5, 'Comedy');
+insert into db_demo (id, label) values (6, 'Drama|Fantasy|Musical|Romance');
+insert into db_demo (id, label) values (7, 'War');
+insert into db_demo (id, label) values (8, 'Comedy|Drama');
+insert into db_demo (id, label) values (9, 'Drama');
+insert into db_demo (id, label) values (10, 'Comedy|Drama|Romance');

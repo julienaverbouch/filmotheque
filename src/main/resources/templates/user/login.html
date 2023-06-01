@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Header -->
+<div th:include="includes/header"></div>
+
+<!-- Content -->
+<div >
+	<div>
+		<!-- login -->
+		<form class="toggle-class" action="/login" method="post" th:object="${formUser}">
+			<fieldset>
+				<!-- Username -->
+				<div >
+					<div >
+						<span ></span>
+						<input  required placeholder="Username" type="text" th:field="${user.login}">
+					</div>
+				</div>
+				<!-- Password -->
+				<div >
+					<div >
+						<span data-uk-icon="icon: lock"></span>
+						<input required placeholder="Password" type="password" th:field="${user.password}">
+					</div>
+				</div>
+				<div class="uk-margin-bottom">
+					<button type="submit">LOG
+						IN</button>
+				</div>
+			</fieldset>
+		</form>
+		<!-- /login -->
+	</div>
+</div>
+<!-- ./Content -->
+<!-- Footer -->
+<div th:include="includes/footer"></div>
+
+</html>
+<style>
+	form {
+		position: absolute;
+		top: 15%
+	}
+</style>

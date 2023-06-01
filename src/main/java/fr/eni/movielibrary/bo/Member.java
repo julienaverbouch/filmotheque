@@ -2,16 +2,51 @@ package fr.eni.movielibrary.bo;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "members")
 public class Member {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@Column(nullable = false)
 	private String lastName;
+	
+	@Column(nullable = false)
 	private String firstName;
+	
+	@Column(nullable = false)
 	private String login;
+	
+	@Column(nullable = false)
 	private String password;
+	
+	@Column(nullable = true)
 	private boolean isAdmin;
+	
+	@OneToMany(mappedBy = "member")
 	private List<Opinion> listOpinions;
 	
+	public Member() {
+		login = "";
+		password = "";
+	}
+	
+	public Member(String lastName, String firstName) {
+		super();
+		this.lastName = lastName;
+		this.firstName = firstName;
+	}
+
 	public Member(long id, String lastName, String firstName, String login, String password, boolean isAdmin, List<Opinion> listOpinions ) {
 		super();
 		this.id = id;

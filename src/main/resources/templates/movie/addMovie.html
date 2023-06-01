@@ -3,47 +3,54 @@
 <!-- Header -->
 <div th:include="includes/header"></div>
 
-  <body>
-    <section class="section-plans" id="section-plans">
-      <div class="u-center-text u-margin-bottom-big">
-        <h2 class="heading-secondary">
-          Liste de films
-        </h2>
-      </div>
-		<div class="btnAjout">
-			<a th:href="@{/movies/add-movie}" class="btn btn--white">Ajouter un film</a>
-		</div>
+<body>
+	<form action="/movie" method="post" th:object="${addFormMovie}">
+		<section class="section-plans" id="section-plans">
+			<div class="u-center-text u-margin-bottom-big">
+				<h2 class="heading-secondary">Ajouter un film</h2>
+			</div>
+			<div class="row">
+				<div style="width: 80%">
+					<div class="card">
+						<div class="card__side card__side--front-1">
+							<div class="card__details">
+								<ul style="display: flex; flex-direction: row;">
+									<div>
+										<li>Nom : <input th:field="${movie.title}" /></li>
+										<li>Année : <input th:field="${movie.year}" /></li>
+										<li>Durée : <input th:field="${movie.duration}" /></li>
+										<li><label for="synopsis">Synopsis:</label> <textarea
+												id="synopsis" th:field="${movie.synopsis}" rows="5"
+												cols="33" /></textarea></li>
+									</div>
+									<li>Genre : 
+										<select
+										th:field="${movie.genre}">
+										<option th:each="genre : ${genreOptions}"
+											th:value="${genre.id}" th:text="${genre.label}"></option>
+										</select>
+									</li> 
+									<li>Réalisateur
+									<select th:field="${movie.director}">
+										<option th:each="participant : ${participantOptions}"
+											th:value="${participant.id}"
+											th:text="${participant.firstName + ' ' + participant.lastName}"></option>
+									</select>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-		<div class="row">
-       <div th:each="movie: ${movies}">
-        <div class="col-1-of-3">
-          <div class="card">
-            <div class="card__side card__side--front-1">
-              <div class="card__title card__title--1">
-              	<img th:src="${movie.image}" style="height:230px;"/>
-              </div>
-              <div class="card__details">
-                  <div th:each="director: ${movie.director}">
-                <ul>
-                  <li>Film : <span th:text="${movie.title}"/></span></li>
-                  <li>Année : <span th:text="${movie.year}"/></span></li>
-                  <li>Temps : <span th:text="${movie.duration}"/></span>min</li>
-                  <li>Réalisateur : <span th:text="${director.firstName}"></span><span th:text="${director.lastName}"></span></li>
-                </ul>
-               </div>
-              </div>
-            </div>
-            <div class="card__side card__side--back card__side--back-1">
-              <div class="card__cta">
-                <a th:href="@{/movies/detail/{id}(id=${movie.id})}" class="btn btn--white">Détail du film</a>
-              </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </body>
+		</section>
+		<div class="card__cta-button">
+			<a th:href="@{/movies}" class="btn btn--white">Retour</a> 
+			<button type="submit" class="btn btn--white">Valider</button>
+		</div>
+	</form>
+</body>
 </html>
 
 <style>
@@ -69,8 +76,6 @@ body {
 	line-height: 1.7;
 	color: #fff;
 	background: #000;
-	height: 98vh;
-	overflow: auto;
 }
 
 .heading-primary {
@@ -133,19 +138,6 @@ body {
 	cursor: pointer;
 }
 
-.btn:hover {
-	-webkit-transform: translateY(-3px);
-	transform: translateY(-3px);
-	-webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-}
-
-.btn:hover::after {
-	-webkit-transform: scaleX(1.4) scaleY(1.6);
-	transform: scaleX(1.4) scaleY(1.6);
-	opacity: 0;
-}
-
 .btn:active, .btn:focus {
 	outline: none;
 	-webkit-transform: translateY(-1px);
@@ -174,15 +166,15 @@ body {
 	background-color: #55c57a;
 }
 
+html {
+	font-size: 62.5%;
+}
+
 *, *::after, *::before {
 	margin: 5px;
 	padding: 0;
 	-webkit-box-sizing: inherit;
 	box-sizing: inherit;
-}
-
-html {
-	font-size: 62.5%;
 }
 
 body {
@@ -191,7 +183,6 @@ body {
 }
 
 .section-plans {
-	margin-top: 5%;
 	background-color: #000;
 	padding: 4rem 0 4rem 0;
 }
@@ -257,17 +248,6 @@ body {
 	background: linear-gradient(-45deg, #9a4eff, #24ff72);
 }
 
-.card:hover .card__side--front-1, .card:hover .card__side--front-2,
-	.card:hover .card__side--front-3 {
-	-webkit-transform: rotateY(-180deg);
-	transform: rotateY(-180deg);
-}
-
-.card:hover .card__side--back {
-	-webkit-transform: rotateY(0);
-	transform: rotateY(0);
-}
-
 .card__title {
 	height: 20rem;
 	margin-bottom: 30px;
@@ -317,6 +297,7 @@ body {
 .card__details {
 	padding: 0 2rem 2rem;
 	padding-top: 20px;
+	margin-left: 10%;
 }
 
 .card__details ul {
@@ -337,7 +318,7 @@ body {
 
 .card__cta {
 	position: absolute;
-	top: 50%;
+	top: 85%;
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
@@ -364,6 +345,8 @@ body {
 .row {
 	max-width: 114rem;
 	margin: 0 auto;
+	display: flex;
+	justify-content: center;
 }
 
 .row:not(:last-child) {
@@ -388,8 +371,9 @@ body {
 .row .col-1-of-3 {
 	width: calc(( 100% - 2 * 6rem)/3);
 }
-.btnAjout {
-	position: absolute;
-	top:8%;
+
+.card__cta-button {
+	display: flex;
+	justify-content: center;
 }
 </style>

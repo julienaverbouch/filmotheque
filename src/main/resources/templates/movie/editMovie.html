@@ -1,15 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<script src="https://kit.fontawesome.com/bdd89edb33.js"></script>
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
-	rel="stylesheet" />
-<title>Edition d'un film</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Header -->
+<div th:include="includes/header"></div>
+
 <body>
 	<form method="post" th:object="${formMovie}">
 		<section class="section-plans" id="section-plans">
@@ -31,25 +24,21 @@
 												id="synopsis" th:field="${movie.synopsis}" rows="5"
 												cols="33" /></textarea></li>
 									</div>
-									<div>
-										<li>Acteurs :
-										<select multiple style="width:300px" >
-											<option th:each="actor : ${movie.listActors}"
-												th:text="${actor.firstName + ' ' + actor.lastName}">
-											</div>
-											</select>
-										</li>
-										<li>Réalisateur : <input
-											th:value="${movie.director.firstName + ' ' + movie.director.lastName}">
-										</li>
-									</div>
+									<li>Genre : 
+										<select
+										th:field="${movie.genre}">
+										<option th:each="genre : ${genreOptions}"
+											th:value="${genre.id}" th:text="${genre.label}"></option>
+										</select>
+									</li> 
+									<li>Réalisateur
+									<select th:field="${movie.director}">
+										<option th:each="participant : ${participantOptions}"
+											th:value="${participant.id}"
+											th:text="${participant.firstName + ' ' + participant.lastName}"></option>
+									</select>
+									</li>
 								</ul>
-							</div>
-						</div>
-						<div class="card__side card__side--back card__side--back-1">
-							<div class="card__cta">
-								<a th:href="@{/movies/detail/{id}(id=${movie.id})}"
-									class="btn btn--white">Valider</a>
 							</div>
 						</div>
 					</div>
@@ -58,8 +47,8 @@
 
 		</section>
 		<div class="card__cta-button">
-			<a th:href="@{/movies}" class="btn btn--white">Retour</a> <a
-				th:href="@{/movies}" type="submit" class="btn btn--white">Valider</a>
+			<a th:href="@{/movies}" class="btn btn--white">Retour</a> 
+			<a type="submit" class="btn btn--white">Valider</a>
 		</div>
 	</form>
 </body>
